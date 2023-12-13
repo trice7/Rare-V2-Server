@@ -1,6 +1,6 @@
-# Instructions
+# Setup Instructions
 
-Clone repository and run the following two commands
+Clone repository and run the following two commands within the cloned directory
 
 `pipenv shell`
 `pipenv install`
