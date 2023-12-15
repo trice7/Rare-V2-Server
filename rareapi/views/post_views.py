@@ -4,7 +4,7 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from rareapi.models import Post
+from rareapi.models import Post, rare_user
 
 class PostView(ViewSet):
   """Rare Post View"""
@@ -35,9 +35,10 @@ class PostView(ViewSet):
     
     Returns -> JSON serialized post instance with a status of 201"""
     category = Category.objects.get(pk=request.data['category'])
+    user = rare_user.objects.get(uid=request.data['uid'])
     
     post = Post.objects.create(
-      rare_user = request.data['uid'],
+      rare_user = user,
       category = category,
       title = request.data['title'],
       publication_date = request.data['publication_date'],
@@ -56,7 +57,8 @@ class PostView(ViewSet):
     
     post = Post.objects.get(pk=pk)
     category = Category.objects.get(pk=request.data['category'])
-    post.rare_user = request.data['uid']
+    user = rare_user.objects.get(uid=request.data['uid'])
+    post.rare_user = user
     post.category = category
     post.title = request.data['title']
     post.publication_date = request.data['publication_date']
