@@ -1,6 +1,6 @@
 [
   {
-      "model": "rare-v2.comment",
+      "model": "rareapi.comment",
       "pk": 1,
       "fields": {
           "author_id": 1,  
@@ -10,7 +10,7 @@
       }
   },
   {
-      "model": "rare-v2.comment",
+      "model": "rareapi.comment",
       "pk": 2,
       "fields": {
           "author_id": 2,  
@@ -20,7 +20,7 @@
       }
   },
   {
-      "model": "rare-v2.comment",
+      "model": "rareapi.comment",
       "pk": 3,
       "fields": {
           "author_id": 1,  
