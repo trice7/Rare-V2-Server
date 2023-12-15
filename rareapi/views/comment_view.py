@@ -3,7 +3,7 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from rareapi.models import Comment, rare_user, Post
+from rareapi.models import Comment, Post, User
 
 class CommentView(ViewSet):
   """Rare Comment View"""
@@ -33,7 +33,7 @@ class CommentView(ViewSet):
     """Handle comment operations for comments
     
     Returns -> JSON serialized comment instance with a status of 201"""
-    author = rare_user.objects.get(pk=request.data['authorId'])
+    author = User.objects.get(pk=request.data['authorId'])
     post = Post.objects.get(pk=request.data['postId'])
     
     comment = comment.objects.create(
@@ -51,7 +51,7 @@ class CommentView(ViewSet):
     Returns -> -- JSON serialized comment with 200 status"""
     
     comment = Comment.objects.get(pk=pk)
-    author = rare_user.objects.get(pk=request.data['authorId'])
+    author = User.objects.get(pk=request.data['authorId'])
     comment.author = author
     post = Post.objects.get(pk=request.data['postId'])
     comment.post = post
