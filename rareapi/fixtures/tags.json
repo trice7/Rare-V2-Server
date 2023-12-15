@@ -1,9 +1,0 @@
-[
-  {
-    "model": "rareapi.tag",
-    "pk":1,
-    "fields": {
-      "label": "This is the first Tag label"
-    }
-  }
-]
