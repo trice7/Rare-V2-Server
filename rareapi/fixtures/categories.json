@@ -1,0 +1,37 @@
+[
+  {
+    "model": "rareapi.category",
+    "pk": 1,
+    "fields": {
+      "label": "Electronics"
+    }
+  },
+  {
+    "model": "rareapi.category",
+    "pk": 2,
+    "fields": {
+      "label": "Clothing"
+    }
+  },
+  {
+    "model": "rareapi.category",
+    "pk": 3,
+    "fields": {
+      "label": "Books"
+    }
+  },
+  {
+    "model": "rareapi.category",
+    "pk": 4,
+    "fields": {
+      "label": "Home and Garden"
+    }
+  },
+  {
+    "model": "rareapi.category",
+    "pk": 5,
+    "fields": {
+      "label": "Sports and Outdoors"
+    }
+  }
+]
