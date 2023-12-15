@@ -1,0 +1,26 @@
+[
+  {
+      "model": "rare-v2.rare_user",
+      "pk": 1,
+      "fields": {
+          "uid": "user1_uid",
+          "bio": "Bio for user 1."
+      }
+  },
+  {
+      "model": "rare-v2.rare_user",
+      "pk": 2,
+      "fields": {
+          "uid": "user2_uid",
+          "bio": "Bio for user 2."
+      }
+  },
+  {
+      "model": "rare-v2.rare_user",
+      "pk": 3,
+      "fields": {
+          "uid": "user3_uid",
+          "bio": "Bio for user 3."
+      }
+  }
+]

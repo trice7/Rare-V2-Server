@@ -1,0 +1,32 @@
+[
+  {
+      "model": "rare-v2.comment",
+      "pk": 1,
+      "fields": {
+          "author_id": 1,  
+          "post_id": 1,    
+          "content": "This is the first comment.",
+          "created_on": "2023-01-01T12:00:00Z"
+      }
+  },
+  {
+      "model": "rare-v2.comment",
+      "pk": 2,
+      "fields": {
+          "author_id": 2,  
+          "post_id": 1,    
+          "content": "Another comment on the same post.",
+          "created_on": "2023-01-02T14:30:00Z"
+      }
+  },
+  {
+      "model": "rare-v2.comment",
+      "pk": 3,
+      "fields": {
+          "author_id": 1,  
+          "post_id": 2,    
+          "content": "Comment on a different post.",
+          "created_on": "2023-01-03T18:45:00Z"
+      }
+  }
+]
