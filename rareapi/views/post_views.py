@@ -16,11 +16,11 @@ class PostView(ViewSet):
     
     try:
       post = Post.objects.get(pk=pk)
-      # tags = PostTag.objects.filter(post = post.pk)
+      tags = PostTag.objects.filter(post = post.pk)
       
-      # tag_list = []
-      # for e in tags:
-      #   tag_list.append(e.tag_id)
+      tag_list = []
+      for e in tags:
+        tag_list.append(e.tag_id)
       
       post.tags = Tag.objects.filter(pk__in = tag_list)
       serializer = PostSerializer(post)
@@ -34,6 +34,15 @@ class PostView(ViewSet):
     Returns -> Response -- JSON serialized list of songs with status 200"""
     
     posts = Post.objects.all()
+    
+    for post in posts:
+      tags = PostTag.objects.filter(post = post.pk)
+      tag_list = []
+      for e in tags:
+        tag_list.append(e.tag_id)
+      post.tags = Tag.objects.filter(pk__in = tag_list)
+      
+    
     serializer = PostSerializer(posts, many=True)
     return Response(serializer.data)
   
@@ -93,7 +102,8 @@ class TagSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
   """JSON serializer for posts"""
   
-  # tags = TagSerializer(many=True)
+  tags = TagSerializer(many=True)
   class Meta:
     model = Post
-    fields = ('id', 'user', 'category', 'title', 'publication_date', 'image_url', 'content', 'approved')
+    fields = ('id', 'user', 'category', 'title', 'publication_date', 'image_url', 'content', 'approved', 'tags')
+    depth = 1
