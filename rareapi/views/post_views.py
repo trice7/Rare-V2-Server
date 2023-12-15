@@ -5,7 +5,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from rareapi.models import Post, User, Category
-
+from .comment_view import CommentSerializer
 class PostView(ViewSet):
   """Rare Post View"""
   
@@ -81,6 +81,8 @@ class PostView(ViewSet):
       
 class PostSerializer(serializers.ModelSerializer):
   """JSON serializer for posts"""
+  
   class Meta:
     model = Post
-    fields = ('id', 'rare_user', 'category', 'title', 'publication_date', 'image_url', 'content', 'approved')
+    fields = ('id', 'user', 'category', 'title', 'publication_date', 'image_url', 'content', 'approved', 'comments')
+    depth = 1
