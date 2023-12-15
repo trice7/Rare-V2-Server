@@ -4,6 +4,7 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
+from rareapi.models import Post, rare_user, Tag, PostTag
 from rareapi.models import Post, User, Category
 
 class PostView(ViewSet):
@@ -16,6 +17,13 @@ class PostView(ViewSet):
     
     try:
       post = Post.objects.get(pk=pk)
+      tags = PostTag.objects.filter(post = post.pk)
+      
+      tag_list = []
+      for e in tags:
+        tag_list.append(e.tag_id)
+      
+      post.tags = Tag.objects.filter(pk__in = tag_list)
       serializer = PostSerializer(post)
       return Response(serializer.data)
     except Post.DoesNotExist as ex:
@@ -77,10 +85,16 @@ class PostView(ViewSet):
     post = Post.objects.get(pk=pk)
     post.delete()
     return Response(None, status=status.HTTP_204_NO_CONTENT)
-      
+
+class TagSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Tag
+    fields = ("id", "label")      
       
 class PostSerializer(serializers.ModelSerializer):
   """JSON serializer for posts"""
+  
+  tags = TagSerializer(many=True)
   class Meta:
     model = Post
-    fields = ('id', 'rare_user', 'category', 'title', 'publication_date', 'image_url', 'content', 'approved')
+    fields = ('id', 'rare_user', 'category', 'title', 'publication_date', 'image_url', 'content', 'approved', 'tags')
