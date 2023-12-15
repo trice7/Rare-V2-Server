@@ -2,6 +2,7 @@ from django.db import models
 from .category import Category
 from .user import User
 
+
 class Post(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   category = models.ForeignKey(Category, on_delete=models.CASCADE)

@@ -5,6 +5,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from rareapi.models import Post, User, Category, Tag, PostTag
+from .comment_view import CommentSerializer
 
 class PostView(ViewSet):
   """Rare Post View"""
@@ -114,5 +115,5 @@ class GetPostSerializer(serializers.ModelSerializer):
   tags = TagSerializer(many=True)
   class Meta:
     model = Post
-    fields = ('id', 'user', 'category', 'title', 'publication_date', 'image_url', 'content', 'approved', 'tags')
+    fields = ('id', 'user', 'category', 'title', 'publication_date', 'image_url', 'content', 'approved', 'comments', 'tags')
     depth = 1
