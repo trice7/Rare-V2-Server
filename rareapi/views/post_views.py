@@ -4,7 +4,7 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from rareapi.models import Post, rare_user, Tag, PostTag
+from rareapi.models import Post, User, Category, Tag, PostTag
 
 class PostView(ViewSet):
   """Rare Post View"""
@@ -16,11 +16,11 @@ class PostView(ViewSet):
     
     try:
       post = Post.objects.get(pk=pk)
-      tags = PostTag.objects.filter(post = post.pk)
+      # tags = PostTag.objects.filter(post = post.pk)
       
-      tag_list = []
-      for e in tags:
-        tag_list.append(e.tag_id)
+      # tag_list = []
+      # for e in tags:
+      #   tag_list.append(e.tag_id)
       
       post.tags = Tag.objects.filter(pk__in = tag_list)
       serializer = PostSerializer(post)
@@ -41,15 +41,15 @@ class PostView(ViewSet):
     """Handle POST operations for posts
     
     Returns -> JSON serialized post instance with a status of 201"""
-    category = Category.objects.get(pk=request.data['category'])
-    user = rare_user.objects.get(uid=request.data['uid'])
+    category = Category.objects.get(pk=request.data['categoryId'])
+    user = User.objects.get(uid=request.data['uid'])
     
     post = Post.objects.create(
-      rare_user = user,
+      user = user,
       category = category,
       title = request.data['title'],
-      publication_date = request.data['publication_date'],
-      image_url = request.data['image_url'],
+      publication_date = request.data['publicationDate'],
+      image_url = request.data['imageUrl'],
       content = request.data['content'],
       approved = request.data['approved'],
     )
@@ -63,12 +63,12 @@ class PostView(ViewSet):
     Returns -> -- JSON serialized post with 200 status"""
     
     post = Post.objects.get(pk=pk)
-    category = Category.objects.get(pk=request.data['category'])
-    user = rare_user.objects.get(uid=request.data['uid'])
-    post.rare_user = user
+    category = Category.objects.get(pk=request.data['categoryId'])
+    user = User.objects.get(uid=request.data['uid'])
+    post.user = user
     post.category = category
     post.title = request.data['title']
-    post.publication_date = request.data['publication_date']
+    post.publication_date = request.data['publicationDate']
     post.content = request.data['content']
     post.approved = request.data['approved']
     
@@ -79,7 +79,7 @@ class PostView(ViewSet):
   def destroy(self, request, pk):
     """Handles Delete requests for a post
     
-    Returns -> EMpy body with a 204 status"""
+    Returns -> Empty body with a 204 status"""
     
     post = Post.objects.get(pk=pk)
     post.delete()
@@ -93,7 +93,7 @@ class TagSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
   """JSON serializer for posts"""
   
-  tags = TagSerializer(many=True)
+  # tags = TagSerializer(many=True)
   class Meta:
     model = Post
-    fields = ('id', 'rare_user', 'category', 'title', 'publication_date', 'image_url', 'content', 'approved', 'tags')
+    fields = ('id', 'rare_user', 'category', 'title', 'publication_date', 'image_url', 'content', 'approved')

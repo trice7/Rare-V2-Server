@@ -20,16 +20,16 @@ class PostTagView(ViewSet):
   
   def create(self, request):
     post_tag = PostTag.objects.create(
-      post=request.data["post_id"],
-      tag=request.data["tag_id"],
+      post=request.data["postId"],
+      tag=request.data["tagId"],
     )
     serializer = PostTagSerializer(post_tag)
     return Response(serializer.data, status=status.HTTP_201_CREATED)
   
   def update(self, request, pk):
     post_tag = PostTag.objects.get(pk=pk)
-    post_tag.post = request.data["post_id"]
-    post_tag.tag = request.data["tag_id"]
+    post_tag.post = request.data["postId"]
+    post_tag.tag = request.data["tagId"]
     post_tag.save()
     serializer = PostTagSerializer(post_tag)
     return Response(serializer.data, status=status.HTTP_200_OK)
@@ -44,4 +44,3 @@ class PostTagSerializer(serializers.ModelSerializer):
     class Meta:
       model = PostTag
       fields = ("id", "post", "tag")
-
