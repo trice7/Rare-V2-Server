@@ -33,12 +33,12 @@ class CommentView(ViewSet):
     """Handle comment operations for comments
     
     Returns -> JSON serialized comment instance with a status of 201"""
-    author_id = rare_user.objects.get(pk=request.data['id'])
-    post_id = Post.objects.get(pk=request.data['id'])
+    author = rare_user.objects.get(pk=request.data['id'])
+    post = Post.objects.get(pk=request.data['id'])
     
     comment = comment.objects.create(
-      author_id = author_id,
-      post_id = post_id,
+      author = author,
+      post = post,
       content = request.data['content'],
       created_on = request.data['created_on'],
     )
@@ -52,10 +52,10 @@ class CommentView(ViewSet):
     Returns -> -- JSON serialized comment with 200 status"""
     
     comment = Comment.objects.get(pk=pk)
-    author_id = rare_user.objects.get(pk=request.data['id'])
-    comment.author_id = author_id
-    post_id = Post.objects.get(pk=request.data['id'])
-    comment.post_id = post_id
+    author = rare_user.objects.get(pk=request.data['id'])
+    comment.author = author
+    post = Post.objects.get(pk=request.data['id'])
+    comment.post = post
     comment.content = request.data['content']
     comment.created_on = request.data['created_on']
     
