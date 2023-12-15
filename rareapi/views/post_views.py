@@ -117,3 +117,4 @@ class GetPostSerializer(serializers.ModelSerializer):
     model = Post
     fields = ('id', 'user', 'category', 'title', 'publication_date', 'image_url', 'content', 'approved', 'comments', 'tags')
     depth = 1
+    
