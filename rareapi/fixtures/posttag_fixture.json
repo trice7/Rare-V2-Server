@@ -1,6 +1,6 @@
 [
   {
-    "model": "rare.posttag",
+    "model": "rareapi.posttag",
     "pk": 1,
     "fields": {
       "post": 1,
@@ -8,7 +8,7 @@
     }
   },
   {
-    "model": "rare.posttag",
+    "model": "rareapi.posttag",
     "pk": 2,
     "fields": {
       "post": 1,
@@ -16,7 +16,7 @@
     }
   },
   {
-    "model": "rare.posttag",
+    "model": "rareapi.posttag",
     "pk": 3,
     "fields": {
       "post": 1,
@@ -24,7 +24,7 @@
     }
   },
   {
-    "model": "rare.posttag",
+    "model": "rareapi.posttag",
     "pk": 4,
     "fields": {
       "post": 2,
@@ -32,7 +32,7 @@
     }
   },
   {
-    "model": "rare.posttag",
+    "model": "rareapi.posttag",
     "pk": 5,
     "fields": {
       "post": 2,
@@ -40,7 +40,7 @@
     }
   },
   {
-    "model": "rare.posttag",
+    "model": "rareapi.posttag",
     "pk": 6,
     "fields": {
       "post": 2,
@@ -48,7 +48,7 @@
     }
   },
   {
-    "model": "rare.posttag",
+    "model": "rareapi.posttag",
     "pk": 7,
     "fields": {
       "post": 3,
@@ -56,7 +56,7 @@
     }
   },
   {
-    "model": "rare.posttag",
+    "model": "rareapi.posttag",
     "pk": 8,
     "fields": {
       "post": 3,
@@ -64,7 +64,7 @@
     }
   },
   {
-    "model": "rare.posttag",
+    "model": "rareapi.posttag",
     "pk": 9,
     "fields": {
       "post": 3,
