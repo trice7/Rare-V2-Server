@@ -4,7 +4,7 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from rareapi.models import Post, rare_user
+from rareapi.models import Post, User, Category
 
 class PostView(ViewSet):
   """Rare Post View"""
@@ -34,15 +34,15 @@ class PostView(ViewSet):
     """Handle POST operations for posts
     
     Returns -> JSON serialized post instance with a status of 201"""
-    category = Category.objects.get(pk=request.data['category'])
-    user = rare_user.objects.get(uid=request.data['uid'])
+    category = Category.objects.get(pk=request.data['categoryId'])
+    user = User.objects.get(uid=request.data['uid'])
     
     post = Post.objects.create(
-      rare_user = user,
+      user = user,
       category = category,
       title = request.data['title'],
-      publication_date = request.data['publication_date'],
-      image_url = request.data['image_url'],
+      publication_date = request.data['publicationDate'],
+      image_url = request.data['imageUrl'],
       content = request.data['content'],
       approved = request.data['approved'],
     )
@@ -56,12 +56,12 @@ class PostView(ViewSet):
     Returns -> -- JSON serialized post with 200 status"""
     
     post = Post.objects.get(pk=pk)
-    category = Category.objects.get(pk=request.data['category'])
-    user = rare_user.objects.get(uid=request.data['uid'])
-    post.rare_user = user
+    category = Category.objects.get(pk=request.data['categoryId'])
+    user = User.objects.get(uid=request.data['uid'])
+    post.user = user
     post.category = category
     post.title = request.data['title']
-    post.publication_date = request.data['publication_date']
+    post.publication_date = request.data['publicationDate']
     post.content = request.data['content']
     post.approved = request.data['approved']
     

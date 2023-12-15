@@ -1,4 +1,4 @@
-from rareapi.models import Rare_User
+from rareapi.models import User
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -14,14 +14,14 @@ def check_user(request):
 
     # Use the built-in authenticate method to verify
     # authenticate returns the user object or None if no user is found
-    rare_user = Rare_User.objects.filter(uid=uid).first()
+    user = User.objects.filter(uid=uid).first()
 
     # If authentication was successful, respond with their token
-    if rare_user is not None:
+    if user is not None:
         data = {
-            'id': rare_user.id,
-            'uid': rare_user.uid,
-            'bio': rare_user.bio
+            'id': user.id,
+            'uid': user.uid,
+            'bio': user.bio
         }
         return Response(data)
     else:
@@ -39,15 +39,15 @@ def register_user(request):
     '''
 
     # Now save the user info in the levelupapi_rare_user table
-    rare_user = Rare_User.objects.create(
+    user = User.objects.create(
         bio=request.data['bio'],
         uid=request.data['uid']
     )
 
     # Return the rare_user info to the client
     data = {
-        'id': rare_user.id,
-        'uid': rare_user.uid,
-        'bio': rare_user.bio
+        'id': user.id,
+        'uid': user.uid,
+        'bio': user.bio
     }
     return Response(data)
