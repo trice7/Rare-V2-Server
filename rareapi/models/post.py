@@ -1,5 +1,5 @@
 from django.db import models
-from .Category import Category
+from .category import Category
 from .user import User
 
 class Post(models.Model):
