@@ -4,8 +4,9 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from rareapi.models import Post, User, Category
+from rareapi.models import Post, User, category, Tag, PostTag
 from .comment_view import CommentSerializer
+
 class PostView(ViewSet):
   """Rare Post View"""
   
@@ -16,6 +17,13 @@ class PostView(ViewSet):
     
     try:
       post = Post.objects.get(pk=pk)
+      tags = PostTag.objects.filter(post = post.pk)
+      
+      tag_list = []
+      for e in tags:
+        tag_list.append(e.tag_id)
+      
+      post.tags = Tag.objects.filter(pk__in = tag_list)
       serializer = PostSerializer(post)
       return Response(serializer.data)
     except Post.DoesNotExist as ex:
@@ -27,6 +35,15 @@ class PostView(ViewSet):
     Returns -> Response -- JSON serialized list of songs with status 200"""
     
     posts = Post.objects.all()
+    
+    for post in posts:
+      tags = PostTag.objects.filter(post = post.pk)
+      tag_list = []
+      for e in tags:
+        tag_list.append(e.tag_id)
+      post.tags = Tag.objects.filter(pk__in = tag_list)
+      
+    
     serializer = PostSerializer(posts, many=True)
     return Response(serializer.data)
   
@@ -72,17 +89,19 @@ class PostView(ViewSet):
   def destroy(self, request, pk):
     """Handles Delete requests for a post
     
-    Returns -> EMpy body with a 204 status"""
+    Returns -> Empty body with a 204 status"""
     
     post = Post.objects.get(pk=pk)
     post.delete()
     return Response(None, status=status.HTTP_204_NO_CONTENT)
-      
+
+class TagSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Tag
+    fields = ("id", "label")      
       
 class PostSerializer(serializers.ModelSerializer):
   """JSON serializer for posts"""
-  
   class Meta:
     model = Post
-    fields = ('id', 'user', 'category', 'title', 'publication_date', 'image_url', 'content', 'approved', 'comments')
-    depth = 1
+    fields = ('id', 'rare_user', 'category', 'title', 'publication_date', 'image_url', 'content', 'approved')
