@@ -1,34 +1,34 @@
 [
   {
-    "model": "rare-v2.category",
+    "model": "rareapi.category",
     "pk": 1,
     "fields": {
       "label": "Electronics"
     }
   },
   {
-    "model": "rare-v2.category",
+    "model": "rareapi.category",
     "pk": 2,
     "fields": {
       "label": "Clothing"
     }
   },
   {
-    "model": "rare-v2.category",
+    "model": "rareapi.category",
     "pk": 3,
     "fields": {
       "label": "Books"
     }
   },
   {
-    "model": "rare-v2.category",
+    "model": "rareapi.category",
     "pk": 4,
     "fields": {
       "label": "Home and Garden"
     }
   },
   {
-    "model": "rare-v2.category",
+    "model": "rareapi.category",
     "pk": 5,
     "fields": {
       "label": "Sports and Outdoors"

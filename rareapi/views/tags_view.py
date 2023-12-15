@@ -21,7 +21,7 @@ class TagView(ViewSet):
     tag = Tag.objects.create(
       label=request.data["label"],
     )  
-    serializer = Tag.objects.get(pk=pk)
+    serializer = TagSerializer(tag)
     return Response(serializer.data, status=status.HTTP_201_CREATED)
   
   def update(self, request, pk):
