@@ -1,6 +1,6 @@
 [
   {
-    "model": "rare-v2.post_tag",
+    "model": "rareapi.post_tag",
     "pk":1,
     "fields": {
       "post_id": 1,
