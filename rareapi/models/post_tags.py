@@ -1,5 +1,6 @@
 from django.db import models
-from rareapi.models import Post, Tag
+from .post import Post
+from .tags import Tag
 
 class PostTag(models.Model):
   post = models.ForeignKey(Post, on_delete=models.CASCADE)

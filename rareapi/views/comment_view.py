@@ -40,7 +40,6 @@ class CommentView(ViewSet):
       author = author,
       post = post,
       content = request.data['content'],
-      created_on = request.data['createdOn'],
     )
     
     serializer = CommentSerializer(comment)
@@ -57,7 +56,6 @@ class CommentView(ViewSet):
     post = Post.objects.get(pk=request.data['postId'])
     comment.post = post
     comment.content = request.data['content']
-    comment.created_on = request.data['createdOn']
     
     comment.save()
     serializer = CommentSerializer(comment)

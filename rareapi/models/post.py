@@ -1,5 +1,6 @@
 from django.db import models
-from rareapi.models import rare_user
+from .rare_user import rare_user
+from .category import Category
 
 class Post(models.Model):
   rare_user = models.ForeignKey(rare_user, on_delete=models.CASCADE)
