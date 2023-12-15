@@ -3,7 +3,7 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from rareapi.models import Comment, rare_user
+from rareapi.models import Comment, rare_user, Post
 
 class CommentView(ViewSet):
   """Rare Comment View"""
@@ -51,7 +51,7 @@ class CommentView(ViewSet):
     
     Returns -> -- JSON serialized comment with 200 status"""
     
-    comment = comment.objects.get(pk=pk)
+    comment = Comment.objects.get(pk=pk)
     author_id = rare_user.objects.get(pk=request.data['id'])
     comment.author_id = author_id
     post_id = Post.objects.get(pk=request.data['id'])
@@ -68,7 +68,7 @@ class CommentView(ViewSet):
     
     Returns -> Empty body with a 204 status"""
     
-    comment = comment.objects.get(pk=pk)
+    comment = Comment.objects.get(pk=pk)
     comment.delete()
     return Response(None, status=status.HTTP_204_NO_CONTENT)
       

@@ -1,5 +1,6 @@
 from django.db import models 
 from .rare_user import rare_user
+from .post import Post
 
 class Comment(models.Model):
     author_id = models.ForeignKey(rare_user, on_delete=models.CASCADE)
