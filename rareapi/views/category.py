@@ -27,6 +27,15 @@ class CategoryView(ViewSet):
         )
         serializer = CategorySerializer(category)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+    def destroy(self, request, pk):
+        """Handles Delete requests for a post
+        
+        Returns -> Empty body with a 204 status"""
+        
+        category = Category.objects.get(pk=pk)
+        category.delete()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
 
 class CategorySerializer(serializers.ModelSerializer):
     """JSON serializer for posts"""
