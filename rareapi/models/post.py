@@ -5,11 +5,9 @@ from .user import User
 
 class Post(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
-  user_name = models.CharField(max_length=50)
   category = models.ForeignKey(Category, on_delete=models.CASCADE)
   title = models.CharField(max_length=50)
   publication_date = models.DateField(auto_now_add=True)
   image_url = models.CharField(max_length=50)
   content = models.TextField()
   approved = models.BooleanField()
-  isAdmin = models.BooleanField(False)
