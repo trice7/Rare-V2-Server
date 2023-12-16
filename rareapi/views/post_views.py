@@ -24,7 +24,7 @@ class PostView(ViewSet):
         tag_list.append(e.tag_id)
       
       post.tags = Tag.objects.filter(pk__in = tag_list)
-      serializer = PostSerializer(post)
+      serializer = GetPostSerializer(post)
       return Response(serializer.data)
     except Post.DoesNotExist as ex:
       return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
@@ -44,7 +44,7 @@ class PostView(ViewSet):
       post.tags = Tag.objects.filter(pk__in = tag_list)
       
     
-    serializer = PostSerializer(posts, many=True)
+    serializer = GetPostSerializer(posts, many=True)
     return Response(serializer.data)
   
   def create(self, request):
@@ -58,7 +58,7 @@ class PostView(ViewSet):
       user = user,
       category = category,
       title = request.data['title'],
-      publication_date = request.data['publicationDate'],
+      # publication_date = request.data['publicationDate'],
       image_url = request.data['imageUrl'],
       content = request.data['content'],
       approved = request.data['approved'],
@@ -78,7 +78,7 @@ class PostView(ViewSet):
     post.user = user
     post.category = category
     post.title = request.data['title']
-    post.publication_date = request.data['publicationDate']
+    # post.publication_date = request.data['publicationDate']
     post.content = request.data['content']
     post.approved = request.data['approved']
     
@@ -103,8 +103,18 @@ class TagSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
   """JSON serializer for posts"""
   
+  # tags = TagSerializer(many=True)
+  class Meta:
+    model = Post
+    fields = ('id', 'user', 'category', 'title', 'publication_date', 'image_url', 'content', 'approved')
+    depth = 1
+
+class GetPostSerializer(serializers.ModelSerializer):
+  """JSON serializer for posts"""
+  
   tags = TagSerializer(many=True)
   class Meta:
     model = Post
     fields = ('id', 'user', 'category', 'title', 'publication_date', 'image_url', 'content', 'approved', 'comments', 'tags')
     depth = 1
+    
