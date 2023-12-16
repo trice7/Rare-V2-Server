@@ -21,7 +21,9 @@ def check_user(request):
         data = {
             'id': user.id,
             'uid': user.uid,
-            'bio': user.bio
+            'bio': user.bio,
+            'name': user.name,
+            'admin': user.admin
         }
         return Response(data)
     else:
@@ -41,13 +43,16 @@ def register_user(request):
     # Now save the user info in the levelupapi_rare_user table
     user = User.objects.create(
         bio=request.data['bio'],
-        uid=request.data['uid']
+        uid=request.data['uid'],
+        name=request.data['name']
     )
 
     # Return the rare_user info to the client
     data = {
         'id': user.id,
         'uid': user.uid,
-        'bio': user.bio
+        'bio': user.bio,
+        'name': user.name,
+        'admin': user.admin
     }
     return Response(data)
