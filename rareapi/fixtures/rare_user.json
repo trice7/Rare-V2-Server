@@ -4,7 +4,9 @@
       "pk": 1,
       "fields": {
           "uid": "user1_uid",
-          "bio": "Bio for user 1."
+          "bio": "Bio for user 1.",
+          "name": "user 1 name",
+          "admin": "False"
       }
   },
   {
@@ -12,7 +14,9 @@
       "pk": 2,
       "fields": {
           "uid": "user2_uid",
-          "bio": "Bio for user 2."
+          "bio": "Bio for user 2.",
+          "name": "user 2 name",
+          "admin": "False"
       }
   },
   {
@@ -20,7 +24,9 @@
       "pk": 3,
       "fields": {
           "uid": "user3_uid",
-          "bio": "Bio for user 3."
+          "bio": "Bio for user 3.",
+          "name": "user 3 name",
+          "admin": "True"
       }
   }
 ]
