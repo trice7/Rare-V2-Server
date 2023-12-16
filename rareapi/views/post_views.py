@@ -70,7 +70,7 @@ class PostView(ViewSet):
   def update(self, request, pk):
     """Handles PUT request for a post
     
-    Returns -> -- JSON serialized post with 200 status"""
+    Returns -> -- Empty body with a 204 status"""
     
     post = Post.objects.get(pk=pk)
     category = Category.objects.get(pk=request.data['categoryId'])
@@ -83,8 +83,8 @@ class PostView(ViewSet):
     post.approved = request.data['approved']
     
     post.save()
-    serializer = PostSerializer(post)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+  
+    return Response(None, status=status.HTTP_204_NO_CONTENT)
   
   def destroy(self, request, pk):
     """Handles Delete requests for a post
