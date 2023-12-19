@@ -22,7 +22,7 @@ class CategoryView(ViewSet):
     def create(self, request):
         """Handle POST operations for categories
         returns -> JSON serialzed post instance with a status of 201"""
-        id = request.META['HTTP_Authorization']
+        id = request.META['HTTP_AUTHORIZATION']
         user = User.objects.get(id=id)
         
         if user.admin:
@@ -37,7 +37,7 @@ class CategoryView(ViewSet):
         """Handles PUT request for a post
         
         Returns -> JSON serialzied post with a 200 status"""
-        id = request.META['HTTP_Authorization']
+        id = request.META['HTTP_AUTHORIZATION']
         user = User.objects.get(id=id)
         
         if user.admin:
@@ -53,7 +53,7 @@ class CategoryView(ViewSet):
         """Handles Delete requests for a post
         
         Returns -> Empty body with a 204 status"""
-        id = request.META['HTTP_Authorization']
+        id = request.META['HTTP_AUTHORIZATION']
         user = User.objects.get(id=id)
         
         if user.admin:
