@@ -2,7 +2,7 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from rareapi.models import PostTag
+from rareapi.models import PostTag, Post, Tag
 
 class PostTagView(ViewSet):
   def retrieve(self, request, pk):
@@ -19,17 +19,21 @@ class PostTagView(ViewSet):
     return Response(serializer.data)
   
   def create(self, request):
+    postId = Post.objects.get(pk=request.data['postId'])
+    tagId = Tag.objects.get(pk=request.data['tagId'])
     post_tag = PostTag.objects.create(
-      post=request.data["postId"],
-      tag=request.data["tagId"],
+      post=postId,
+      tag=tagId
     )
     serializer = PostTagSerializer(post_tag)
     return Response(serializer.data, status=status.HTTP_201_CREATED)
   
   def update(self, request, pk):
     post_tag = PostTag.objects.get(pk=pk)
-    post_tag.post = request.data["postId"]
-    post_tag.tag = request.data["tagId"]
+    postId = Post.objects.get(pk=request.data['postId'])
+    tagId = Tag.objects.get(pk=request.data['tagId'])
+    post_tag.post = postId
+    post_tag.tag = tagId
     post_tag.save()
     serializer = PostTagSerializer(post_tag)
     return Response(serializer.data, status=status.HTTP_200_OK)
