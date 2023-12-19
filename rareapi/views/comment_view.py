@@ -36,7 +36,7 @@ class CommentView(ViewSet):
     author = User.objects.get(pk=request.data['authorId'])
     post = Post.objects.get(pk=request.data['postId'])
     
-    comment = comment.objects.create(
+    comment = Comment.objects.create(
       author = author,
       post = post,
       content = request.data['content'],
