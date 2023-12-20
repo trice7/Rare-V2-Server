@@ -28,5 +28,15 @@
           "name": "user 3 name",
           "admin": "True"
       }
+  },
+  {
+      "model": "rareapi.user",
+      "pk": 4,
+      "fields": {
+          "uid": "SA7ipgtRdbfxisnIqPM2LxvENvy1",
+          "bio": "Am man with stuff",
+          "name": "Crazymace",
+          "admin": "True"
+      }
   }
 ]
